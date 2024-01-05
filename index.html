@@ -59,7 +59,17 @@
           </div>
 
           <div class="col-md-6">
-            <h2>單一產品細節</h2>
+            <div class="d-flex justify-content-between align-items-center">
+              <h2>單一產品細節</h2>
+              <button
+                class="btn btn-sm btn-primary px-4"
+                type="button"
+                @click="handleCloseItem"
+                v-show="tempItem.id"
+              >
+                關閉
+              </button>
+            </div>
 
             <template v-if="tempItem.id">
               <div class="card mb-3">
@@ -71,7 +81,9 @@
                 <div class="card-body">
                   <h5 class="card-title">
                     {{ tempItem.title}}
-                    <span class="badge bg-primary ms-2">{{ }}</span>
+                    <span class="badge bg-primary ms-2"
+                      >{{ tempItem.category }}</span
+                    >
                   </h5>
                   <p class="card-text">商品描述：{{tempItem.description }}</p>
                   <p class="card-text">商品內容：{{ tempItem.content}}</p>
@@ -84,16 +96,9 @@
                   </div>
                 </div>
               </div>
-              <template>
-                <img src="" alt="" class="images m-2" />
+              <template v-for="pic in tempItem.imagesUrl">
+                <img v-bind:src="pic" alt="" class="images m-2" />
               </template>
-              <button
-                class="btn btn-primary"
-                type="button"
-                @click="handleCloseItem"
-              >
-                關閉
-              </button>
             </template>
             <p class="text-secondary" v-else="tempItem.id">
               請選擇一個商品查看
